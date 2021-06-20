@@ -3,39 +3,57 @@ using TicketLibrary;
 
 namespace TicketLibraryTest
 {
-    public class UnitTest1
+    public class Test
     {
-       
+
+
+        [Fact]
+        public void Create_TwoArgs_ReturnEmailCreatorNameAsNotSpecified()
+        {
+            //Arrange
+            string staffID = "JayL";
+            string description = "ticket description";
+
+            //Act
+            var ticket = new Ticket(staffID, description);
+
+            //Assert
+            Assert.Equal("Not Specified", ticket.Email);
+            Assert.Equal("Not Specified", ticket.CreatorName);
+        }
+
+        [Fact]
+        public void Create_FourArgs_ReturnsTicket()
+        {
+            //Arrange
+            string staffID = "JayL";
+            string description = "ticket description";
+            string email = "jl@gmail.com";
+            string creatorName = "Junzhong Loo";
+
+            //Act
+            var ticket = new Ticket(staffID, description, email, creatorName);
+
+            //Assert
+            Assert.IsType<Ticket>(ticket);
+        }
+
+        // empty string args + password change
+
+        // create 10000000 tickets
+
+
+
+
 
         //[Fact]
-        //public void Create_TwoArgs_ReturnEmailCreatorNameAsNotSpecified()
+        //public void TickettStatsIsEqualType()
         //{
-        //    //Arrange
-        //    string staffID = "JayL";
-        //    string description = "ticket description";
+        //    var ticket_1 = new Ticket("Test", "test", "Test", "Test");
+        //    var ticketStats = TicketStats.getInstance();
+        //    var ticket_2 = new Ticket("test2,", "test2");
 
-        //    //Act
-        //    var ticket = new Ticket(staffID, description);
-
-        //    //Assert
-        //    Assert.Equal("Not Specified", ticket.Email);
-        //    Assert.Equal("Not Specified", ticket.CreatorName);
-        //}
-
-        //[Fact]
-        //public void Create_FourArgs_ReturnInstanceOfTypeTicket()
-        //{
-        //    //Arrange
-        //    string staffID = "JayL";
-        //    string description = "ticket description";
-        //    string email = "jl@gmail.com";
-        //    string creatorName = "Junzhong Loo";
-
-        //    //Act
-        //    var ticket = new Ticket(staffID, description, email, creatorName);
-
-        //    //Assert
-        //    Assert.IsType<Ticket>(ticket);
+            
         //}
         //[Fact]
         //public void TicketNumber_IsEqualTo_2000PlusTicketCount()
@@ -94,6 +112,6 @@ namespace TicketLibraryTest
         //    Assert.Equal(expected, ticketCount);
         //}
 
-        
+
     }
 }

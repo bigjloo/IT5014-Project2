@@ -16,7 +16,8 @@ namespace TicketLibrary
         {
             string passwordFirstBlock = staffID.Substring(0, 2);
             string passwordSecondBlock = UintToHex(ticketNumber);
-            string passwordFinalBlock = StringToHex(DateTime.Now.Millisecond.ToString());
+            string passwordFinalBlock = DateTime.Now.Millisecond.ToString("X");
+
             var password = passwordFirstBlock + passwordSecondBlock + passwordFinalBlock;
             return password;
         }

@@ -6,24 +6,25 @@ using System.Threading.Tasks;
 
 namespace TicketLibrary
 {
-    // Singleton TicketStats
+    
     // Stores state of Ticket statistics
-    public class TicketStats
+    public class TicketStats : ITicketStats
     {
         private static TicketStats _instance = new TicketStats();
         private static uint _created { get; set; } = 0;
         private static uint _closed { get; set; } = 0;
         private static uint _opened { get; set; } = 0;
-        private TicketStats(){}
 
-        public static TicketStats getInstance()
+        private TicketStats() { }
+
+        public static TicketStats GetInstance()
         {
             return _instance;
         }
-   
+
         public void UpdateStats(string status)
         {
-            switch(status)
+            switch (status)
             {
                 case "Open":
                     _created += 1;
@@ -43,15 +44,18 @@ namespace TicketLibrary
         }
 
         public static string GetTicketStats()
-        {   //BEFORE
+        {   
+            //BEFORE
             //Console.WriteLine("Displaying Ticket Statistics");
             //Console.WriteLine("");
             //Console.WriteLine($"Tickets Created: {Created}");
             //Console.WriteLine($"Tickets Resolved: {Closed}");
             //Console.WriteLine($"Tickets To Solve: {Opened}");
             //Console.WriteLine("");
-            string statsString = $"Tickets Created: {_created}\nTickets Resolved: {_closed}\nTickets To Solve: {_opened}\n";
-            return statsString;
+            string ticketStatistics = $"Tickets Created: {_created}\nTickets Resolved: {_closed}\nTickets To Solve: {_opened}\n";
+            return ticketStatistics;
         }
+
+        
     }
 }

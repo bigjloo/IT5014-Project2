@@ -4,8 +4,6 @@ namespace TicketLibrary
 {
     public class Ticket
     {
-        
-        
         public string StaffID { get; private set; }      
         public string Description { get; private set; }
         public string Email { get; private set; }
@@ -13,77 +11,82 @@ namespace TicketLibrary
         public uint TicketNumber { get; private set; }
         public string Status { get; private set; }
         public string Response { get; private set; } = "Not Yet Provided";
+
         private static uint _ticketCounter = 0;
-        private readonly TicketStats _ticketStats = TicketStats.getInstance();
+        private readonly ITicketStats _ticketStats; 
 
-        public Ticket(string staffID, string description)
+        public Ticket(string staffID, string description, ITicketStats ticketStats)
         {
-            UpdateTicketCounter();
-
             StaffID = staffID;
             Description = description;
             Email = "Not Specified";
             CreatorName = "Not Specified";
-            TicketNumber = GenerateTicketNumber();
+            _ticketStats = ticketStats;
 
-            UpdateStatusAndTicketStats("Open");
+            SetTicketCounter();
+            TicketNumber = GetTicketNumber();
+
+            SetStatus("Open");
 
             if(HasPasswordChangeIn(description))
             {
                 ProcessPasswordChange();
-                UpdateStatusAndTicketStats("Closed");
+                SetStatus("Closed");
             }
         }
-
-        public Ticket(string staffID, string description, string creatorName, string email)
+      
+        public Ticket(string staffID, string description, string creatorName, string email, ITicketStats ticketStats)
         {
-            UpdateTicketCounter();
-
             StaffID = staffID;
             Description = description;
             Email = email;
             CreatorName = creatorName;
-            TicketNumber = GenerateTicketNumber();
+            _ticketStats = ticketStats;
 
-            UpdateStatusAndTicketStats("Open");
+            SetTicketCounter();
+            TicketNumber = GetTicketNumber();
+
+            SetStatus("Open");
 
             if(HasPasswordChangeIn(description))
             {
                 ProcessPasswordChange();
-                UpdateStatusAndTicketStats("Closed");
+                SetStatus("Closed");
             }
         }
         public void Resolve(string message)
         {
             Respond(message);
-            UpdateStatusAndTicketStats("Closed");
+            SetStatus("Closed");
         }
 
         public void Reopen()
         {
-            UpdateStatusAndTicketStats("Reopened");
+            SetStatus("Reopened");
         }
 
-        private static void UpdateTicketCounter()
+        // problem when many set at same time?
+        private void SetTicketCounter()
         {
             _ticketCounter += 1;
         }
 
-        private static uint GenerateTicketNumber()
+        private static uint GetTicketNumber()
         {
             var ticketNumber = _ticketCounter + 2000;
             return ticketNumber;
         }
 
-        private void UpdateStatusAndTicketStats(string status)
+        private void SetStatus(string status)
         {
             Status = status;
-            _ticketStats.UpdateStats(Status);
+            _ticketStats.UpdateStats(status);
         }
 
         private static bool HasPasswordChangeIn(string description)
         {
-            return (description.ToLower().Trim() == "password change");
+            string str = description.ToLower();
+            return str.Contains("password change");
         }
 
         private void ProcessPasswordChange()
