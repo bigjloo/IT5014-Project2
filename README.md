@@ -9,3 +9,6 @@ IT1504 - Project 2 - Ticket System in C#
 - Develop solution in C#
 - Object Oriented Programming
 - UML diagrams 
+
+## Planning
+

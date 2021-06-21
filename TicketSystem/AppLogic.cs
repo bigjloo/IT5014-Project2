@@ -25,17 +25,21 @@ namespace TicketSystem
 
         public static void DisplayTicketStatsAndInformation()
         {
-            //BEFORE
-            //TicketStats.DisplayStats();
-            //TicketContainer.DisplayAllTickets();
-
+            PrintAllTicketStatistics();
+            PrintAllTicketObjects();  
+        }
+        public static void PrintAllTicketStatistics()
+        {
+            TicketStats ticketStats = TicketStats.GetInstance();
             Console.WriteLine("Displaying Ticket Statistics: \n");
-            Console.WriteLine(TicketStats.GetTicketStats());
-
-            Console.WriteLine("Printing Tickets: \n");
-
+            Console.WriteLine(ticketStats.GetTicketStats());
+        }
+        public static void PrintAllTicketObjects()
+        {
             var ticketContainer = TicketContainer.GetInstance();
             var tickets = ticketContainer.GetTickets();
+
+            Console.WriteLine("Printing Tickets: \n");
             foreach (Ticket ticket in tickets)
             {
                 Console.WriteLine($"Ticket Number: {ticket.TicketNumber}");
@@ -47,5 +51,7 @@ namespace TicketSystem
                 Console.WriteLine($"Ticket Status: {ticket.Status} \n");
             }
         }
+
+        
     }
 }

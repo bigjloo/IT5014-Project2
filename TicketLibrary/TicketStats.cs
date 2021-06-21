@@ -58,7 +58,7 @@ namespace TicketLibrary
             }
         }
 
-        public static string GetTicketStats()
+        public string GetTicketStats()
         {   
             //BEFORE
             //Console.WriteLine("Displaying Ticket Statistics");

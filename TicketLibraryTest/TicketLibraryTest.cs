@@ -6,52 +6,164 @@ namespace TicketLibraryTest
 {
     public class TicketLibraryTest
     {
-        // Create Ticket instance with two arguements expect email and creatorname to be not specified
+
+        // Test #1
+        // Creates Ticket with two arguments, password change
+        // Expect:
+        //   Ticket of type Ticket
+        //   Ticket.Email, Ticket.CreatorName == "Not Specified"
+        //   Ticket.Response != "Not Yet Provided"
+        [Fact]
+        public void CreateTicket_TwoArgs_WithPasswordChangeInDescription()
+        {
+            var staffID = "staffID test";
+            var description = "Password Change";
+            Ticket ticket = AppLogic.CreateTicket(staffID, description);
+
+            var expectedResponse = "Not Yet Provided";
+            var actualResponse = ticket.Response;
+
+            var expectedStaffID = staffID;
+            var actualStaffID = ticket.StaffID;
+
+            var expectedDescription = description;
+            var actualDescription = ticket.Description;
+
+            var expectedEmail = "Not Specified";
+            var actualEmail = ticket.Email;
+
+            var expectedCreatorName = "Not Specified";
+            var actualCreatorName = ticket.CreatorName;
+
+            Assert.IsType<Ticket>(ticket);
+            Assert.NotEqual(expectedResponse, actualResponse);
+            Assert.Equal(expectedStaffID, actualStaffID);
+            Assert.Equal(expectedDescription, actualDescription);
+            Assert.Equal(expectedEmail, actualEmail);
+            Assert.Equal(expectedCreatorName, actualCreatorName);
+        }
+
+        // Test #2
+        // Create Ticket instance with two arguements, no password change
+        // Expect:
+        //   Ticket of type Ticket
+        //   Ticket.Email and Ticket.CreatorName == "Not Specified"
+        //   Ticket.Response == "Not Yet Provided"
         [Theory]
         [InlineData("JOHND", "Mouse not working")]
         [InlineData("123", "")]
         [InlineData("asdsdsdsdsdsdssdsdssd", "123123123123123123")]
-        public void CreateTicket_TwoArgs_NoPasswordChangeRequest_ReturnTicketWithEmailCreatorNameAsNotSpecified(string staffID, string description)
+        public void CreateTicket_TwoArgs_NoPasswordChangeRequest(string staffID, string description)
         {
             //Arrange
+            var defaultTicketResponse = "Not Yet Provided";
+            var defaultEmail = "Not Specified";
+            var defaultCreatorName = "Not Specified";
             string staffId = staffID;
             string desc = description;
-            ITicketStats ticketStats = TicketStats.GetInstance();
 
-            //Act
-            Ticket ticket = new Ticket(staffId, desc, ticketStats);
-            var expected = "Not Specified";
+            Ticket ticket = AppLogic.CreateTicket(staffID, description);
 
-            //Assert
+            var expectedResponse = "Not Yet Provided";
+            var actualResponse = ticket.Response;
+
+            var expectedStaffID = staffID;
+            var actualStaffID = ticket.StaffID;
+
+            var expectedDescription = description;
+            var actualDescription = ticket.Description;
+
+            var expectedEmail = "Not Specified";
+            var actualEmail = ticket.Email;
+
+            var expectedCreatorName = "Not Specified";
+            var actualCreatorName = ticket.CreatorName;
+
             Assert.IsType<Ticket>(ticket);
-            Assert.Equal(ticket.StaffID, staffId);
-            Assert.Equal(ticket.Description, desc);
-            Assert.Equal(expected, ticket.Email);
-            Assert.Equal(expected, ticket.CreatorName);
+            Assert.Equal(expectedResponse, actualResponse);
+            Assert.Equal(expectedStaffID, actualStaffID);
+            Assert.Equal(expectedDescription, actualDescription);
+            Assert.Equal(expectedEmail, actualEmail);
+            Assert.Equal(expectedCreatorName, actualCreatorName);
         }
 
-        // Create Ticket instance with four arguements
+        // Test #3
+        // Create Ticket instance with four arguments, password change
+        // Expect:
+        //   Ticket of type Ticket
+        //   Ticket.Response != "Not Yet Provided"
         [Fact]
-        public void CreateTicket_FourArgs_NoPasswordChangeRequest_ReturnsTicket()
+        public void CreateTicket_FourArgs_WithPasswordChangeInDescription()
         {
-            //Arrange
-            string staffID = "JayL";
-            string description = "ticket description";
-            string email = "jl@gmail.com";
-            string creatorName = "Junzhong Loo";
-            ITicketStats ticketStats = TicketStats.GetInstance();
+            var staffID = "staffID test";
+            var description = "Password Change";
+            var email = "email test";
+            var creatorName = "creatorName test";
 
-            //Act
-            Ticket ticket = new Ticket(staffID, description, email, creatorName, ticketStats);
+            Ticket ticket = AppLogic.CreateTicket(staffID, description, email, creatorName);
 
-            //Assert
+            var expectedResponse = "Not Yet Provided";
+            var actualResponse = ticket.Response;
+
+            var expectedStaffID = staffID;
+            var actualStaffID = ticket.StaffID;
+
+            var expectedDescription = description;
+            var actualDescription = ticket.Description;
+
+            var expectedEmail = email;
+            var actualEmail = ticket.Email;
+
+            var expectedCreatorName = creatorName;
+            var actualCreatorName = ticket.CreatorName;
+
             Assert.IsType<Ticket>(ticket);
-            Assert.Equal(ticket.StaffID, staffID);
-            Assert.Equal(ticket.Description, description);
-            Assert.Equal(ticket.Email, email);
-            Assert.Equal(ticket.CreatorName, creatorName);
+            Assert.NotEqual(expectedResponse, actualResponse);
+            Assert.Equal(expectedStaffID, actualStaffID);
+            Assert.Equal(expectedDescription, actualDescription);
+            Assert.Equal(expectedEmail, actualEmail);
+            Assert.Equal(expectedCreatorName, actualCreatorName);
         }
 
+        // Test #4
+        // Create Ticket instance with four arguements, no password change
+        // Expect:
+        //   Ticket of type Ticket
+        //   Ticket.Response == "Not Yet Provided"
+        [Fact]
+        public void CreateTicket_FourArgs_NoPasswordChangeRequest()
+        {
+            var staffID = "staffID test";
+            var description = "description test";
+            var email = "email test";
+            var creatorName = "creatorName test";
+
+            Ticket ticket = AppLogic.CreateTicket(staffID, description, email, creatorName);
+
+            var expectedResponse = "Not Yet Provided";
+            var actualResponse = ticket.Response;
+
+            var expectedStaffID = staffID;
+            var actualStaffID = ticket.StaffID;
+
+            var expectedDescription = description;
+            var actualDescription = ticket.Description;
+
+            var expectedEmail = email;
+            var actualEmail = ticket.Email;
+
+            var expectedCreatorName = creatorName;
+            var actualCreatorName = ticket.CreatorName;
+
+            Assert.IsType<Ticket>(ticket);
+            Assert.Equal(expectedResponse, actualResponse);
+            Assert.Equal(expectedStaffID, actualStaffID);
+            Assert.Equal(expectedDescription, actualDescription);
+            Assert.Equal(expectedEmail, actualEmail);
+            Assert.Equal(expectedCreatorName, actualCreatorName);
+        }
+
+        // Test #5
         // Only one instance of TicketStats 
         [Fact]
         public void TicketStatsReturnsSameInstance()
@@ -60,10 +172,11 @@ namespace TicketLibraryTest
             var ticketstats2 = TicketStats.GetInstance();
             var ticketstats3 = TicketStats.GetInstance();
 
-            Assert.Same(ticketstats1, ticketstats2);
-            Assert.Same(ticketstats2, ticketstats3);
+            Assert.True(ticketstats1.Equals(ticketstats2));
+            Assert.True(ticketstats2.Equals(ticketstats3));
         }
         
+        // Test #6
         // Only one instance of TicketContainer
         [Fact]
         public void TicketContainerReturnsSameInstance()
@@ -72,148 +185,177 @@ namespace TicketLibraryTest
             var ticketContainer2 = TicketContainer.GetInstance();
             var ticketContainer3 = TicketContainer.GetInstance();
 
-            Assert.Same(ticketContainer1, ticketContainer2);
-            Assert.Same(ticketContainer2, ticketContainer3);
+            Assert.True(ticketContainer1.Equals(ticketContainer2));
+            Assert.True(ticketContainer2.Equals(ticketContainer3));
         }
 
-        // Create Ticket with two arguements updates TicketStats created by one and TicketContainer tickets by one 
+        // Test #7
+        // For every Ticket created:
+        //   TicketStats.Created += 1
+        //   TicketStats.Opened += 1
         [Fact]
-        public void CreateTicket_TwoArgs_ReturnsTicket_StatsUpdateByOne_TicketsInContainerUpdateByOne()
+        public void CreateTicket_StatsUpdateByOnePerTicket()
         {
             TicketStats ticketStats = TicketStats.GetInstance();
-            TicketContainer ticketContainer = TicketContainer.GetInstance();
-            
+
             // Get before Ticket created stats and Ticket count
             var createdBefore = ticketStats.GetCreated();
-            var ticketCountBefore = ticketContainer.GetTickets().Count;
+            var openedBefore = ticketStats.GetOpened();
 
-            // Create new Ticket
+            // Create Tickets 
             AppLogic.CreateTicket("test", "test");
-
-            var expectedStats = createdBefore + 1;
-            var expectedTicketCount = ticketCountBefore + 1;
-            var actualStats = ticketStats.GetCreated();
-            var actualTicketCount = ticketContainer.GetTickets().Count;
-
-            Assert.Equal(expectedStats, actualStats);
-            Assert.Equal(expectedTicketCount, actualTicketCount);
-        }
-
-        // Create Ticket with four arguements updates TicketStats created by one and TicketContainer tickets by one 
-        [Fact]
-        public void CreateTicket_FourArgs_ReturnsTicket_StatsUpdateByOne_TicketsInContainerUpdateByOne()
-        {
-            TicketStats ticketStats = TicketStats.GetInstance();
-            TicketContainer ticketContainer = TicketContainer.GetInstance();
-
-            var createdBefore = ticketStats.GetCreated();
-            var ticketCountBefore = ticketContainer.GetTickets().Count;
-
             AppLogic.CreateTicket("test", "test", "test", "test");
 
-            var expectedStats = createdBefore + 1;
-            var expectedTicketCount = ticketCountBefore + 1;
-            var actualStats = ticketStats.GetCreated();
-            var actualTicketCount = ticketContainer.GetTickets().Count;
+            var expectedCreatedAfter = createdBefore + 2;
+            var actualCreatedAfter = ticketStats.GetCreated();
 
-            Assert.Equal(expectedStats, actualStats);
-            Assert.Equal(expectedTicketCount, actualTicketCount);
+            var expectedOpenedAfter = openedBefore + 2;
+            var actualOpenedAfter = ticketStats.GetOpened();
+
+            Assert.Equal(expectedCreatedAfter, actualCreatedAfter);
+            Assert.Equal(expectedOpenedAfter, actualOpenedAfter);
         }
 
-        // Ticket number for Ticket plus one for every new ticket created
-        [Theory]
-        [InlineData(3)]
-        [InlineData(10)]
-        [InlineData(9999999)]
-        public void CreateTicket_TicketNumberPlusOneForNumberOfTicketsCreated(int numberOfTickets)
+        // Test #8
+        // Ticket counter static field + 1 for every ticket created
+        [Fact]
+        public void CreateTicket_TicketNumberPlusOne()
         {
             // To get before ticket number
             Ticket ticket = AppLogic.CreateTicket("test", "test");
+            Ticket ticket2 = AppLogic.CreateTicket("test", "test", "test", "test");
+            
             var beforeTicketNumber = ticket.TicketNumber;
+            var afterTicketNumber = ticket2.TicketNumber;
 
-            // Create numberOfTickets instances of Tickets
-            for(var i = 0; i < numberOfTickets; i++)
-            {
-                AppLogic.CreateTicket("test", "test");
-            }
-            var tickets = TicketContainer.GetInstance().GetTickets();
-
-            var expected = beforeTicketNumber + numberOfTickets;
-            // Get ticket number of last Ticket created
-            var actual = tickets[tickets.Count - 1].TicketNumber;
+            uint expected = 1;
+            var actual = afterTicketNumber - beforeTicketNumber;
 
             Assert.Equal(expected, actual);
         }
 
-        // Resolve ticket should:
-        // Set status to "Closed"
-        // Update TicketStats -> opened -= 1, closed += 1;
+        // Test #9
+        // Method: Ticket.Resolve(message) sets Ticket.Response == message
         [Fact]
-        public void ResolveTicket_ShouldSetStatusToClosed_UpdateStatsOpenedClosed()
+        public void Resolve_WithMessage_SetsTicketResponseToMessage()
         {
             Ticket ticket = AppLogic.CreateTicket("test", "test");
-            TicketStats ticketStats = TicketStats.GetInstance();
+            Ticket ticket2 = AppLogic.CreateTicket("test", "test", "test", "test");
+            var message = "test message";
 
-            var openedStatsBefore = ticketStats.GetOpened();
-            var closedStatsBefore = ticketStats.GetClosed();
+            ticket.Resolve(message);
+            ticket2.Resolve(message);
 
-            var expectedOpenedStatsAfterResolve = openedStatsBefore - 1;
-            var expectedClosedStatsAfterResolve = closedStatsBefore + 1;
-            var expectedStatusAfter = "Closed";
+            var expectedTicket1Response = message;
+            var actualTicket1Response = ticket.Response;
 
-            ticket.Resolve("test resolve message");
+            var expectedTicket2Response = message;
+            var actualTicket2Response = ticket2.Response;
 
-            var actualStatusAfter = ticket.Status;
-            var actualStatsClosedAfterResolve = ticketStats.GetClosed();
-            var actualStatsOpenedAfterResolve = ticketStats.GetOpened();
-
-            Assert.Equal(expectedStatusAfter, actualStatusAfter);
-            Assert.Equal(expectedOpenedStatsAfterResolve, actualStatsOpenedAfterResolve);
-            Assert.Equal(expectedClosedStatsAfterResolve, actualStatsClosedAfterResolve);
+            Assert.Equal(expectedTicket1Response, actualTicket1Response);
+            Assert.Equal(expectedTicket2Response, actualTicket2Response);
         }
 
-        // Reopen ticket should:
-        // Set status to "Reopened"
-        // Update TicketStats -> opened += 1, closed -= 1;
+        // Test #10
+        // Method: Ticket.Resolve() updates TicketStats.Opened -1 and TicketStats.Closed +1
         [Fact]
-        public void ReopenTicket_ShouldSetStatusToReopened_UpdateStatsOpenedClosed()
+        public void Resolve_Updates_TicketStatsOpenedMinusOne_TicketStatsClosedPlusOne()
         {
-            Ticket ticket = AppLogic.CreateTicket("test", "test");
             TicketStats ticketStats = TicketStats.GetInstance();
+            Ticket ticket = AppLogic.CreateTicket("test", "test");
+            Ticket ticket2 = AppLogic.CreateTicket("test", "test", "test", "test");
+            
+            var beforeOpened = ticketStats.GetOpened();
+            var beforeClosed = ticketStats.GetClosed();
 
-            var openedStatsBefore = ticketStats.GetOpened();
-            var closedStatsBefore = ticketStats.GetClosed();
+            ticket.Resolve("test");
+            ticket2.Resolve("test");
+
+            var expectedAfterOpened = beforeOpened - 2;
+            var actualAfterOpened = ticketStats.GetOpened();
+
+            var expectedAfterClosed = beforeClosed + 2;
+            var actualAfterClosed = ticketStats.GetClosed();
+
+            Assert.Equal(expectedAfterOpened, actualAfterOpened);
+            Assert.Equal(expectedAfterClosed, actualAfterClosed);
+        }
+
+        // Test #11
+        // Method: Ticket.Reopen() updates TicketStats.Opened +1 and TicketStats.Closed -1
+        [Fact]
+        public void Reopen_Updates_TicketStatsOpenedPlusOne_TicketStatsClosedMinusOne()
+        {
+            TicketStats ticketStats = TicketStats.GetInstance();
+            Ticket ticket = AppLogic.CreateTicket("test", "test");
+            Ticket ticket2 = AppLogic.CreateTicket("test", "test", "test", "test");
+            ticket.Resolve("");
+            ticket2.Resolve("");
+
+            var beforeOpened = ticketStats.GetOpened();
+            var beforeClosed = ticketStats.GetClosed();
 
             ticket.Reopen();
+            ticket2.Reopen();
 
-            var expectedOpenedStatsAfterReopen = openedStatsBefore + 1;
-            var expectedClosedStatsAfterReopen = closedStatsBefore - 1;
-            var expectedStatusAfter = "Reopened";
+            var expectedAfterOpened = beforeOpened + 2;
+            var actualAfterOpened = ticketStats.GetOpened();
 
-            var actualStatusAfter = ticket.Status;
-            var actualStatsClosedAfterResolve = ticketStats.GetClosed();
-            var actualStatsOpenedAfterResolve = ticketStats.GetOpened();
+            var expectedAfterClosed = beforeClosed - 2;
+            var actualAfterClosed = ticketStats.GetClosed();
 
-            Assert.Equal(expectedStatusAfter, actualStatusAfter);
-            Assert.Equal(expectedOpenedStatsAfterReopen, actualStatsOpenedAfterResolve);
-            Assert.Equal(expectedClosedStatsAfterReopen, actualStatsClosedAfterResolve);
+            Assert.Equal(expectedAfterOpened, actualAfterOpened);
+            Assert.Equal(expectedAfterClosed, actualAfterClosed);
         }
 
-        // Ticket created default Ticket.Response == "Not yet provided"
-        // Only when Ticket.Description contains "password change" will default Ticket.Response != "Not yet provided"
+        // Test #12
+        // Property: Ticket should have properties of:
         [Theory]
-        [InlineData("password change")]
-        [InlineData("  password change")]
-        [InlineData("password change ")]
-        [InlineData("Password Change")]
-        public void CreateTicket_WithPasswordChangeInDescription_ReturnsTicketWithPasswordResponse(string description)
+        [InlineData("TicketNumber")]
+        [InlineData("CreatorName")]
+        [InlineData("StaffID")]
+        [InlineData("Email")]
+        [InlineData("Description")]
+        [InlineData("Response")]
+        [InlineData("Status")]
+        public void Property_Exist_InTicketClass(string propertyName)
         {
-            var defaultTicketResponse = "Not Yet Provided";
-            Ticket ticket = AppLogic.CreateTicket("test", description);
+            Ticket ticket = AppLogic.CreateTicket("test", "test");
+            Ticket ticket2 = AppLogic.CreateTicket("test", "test", "test", "test");
 
-            var expected = defaultTicketResponse;
-            var actual = ticket.Response;
-            Assert.NotEqual(expected, actual);
+            var propertyTicket1 = ticket.GetType().GetProperty(propertyName);
+            var propertyTicket2 = ticket2.GetType().GetProperty(propertyName);
+
+            Assert.NotNull(propertyTicket1);
+            Assert.NotNull(propertyTicket2);
+        }
+
+        // Test #13
+        // Method: Ticket should have method for:
+        [Theory]
+        [InlineData("Resolve")]
+        [InlineData("Reopen")]
+        public void Method_Exist_InTicketClass(string methodName)
+        {
+            Ticket ticket = AppLogic.CreateTicket("test", "test");
+            Ticket ticket2 = AppLogic.CreateTicket("test", "test", "test", "test");
+
+            var methodTicket1 = ticket.GetType().GetMethod(methodName);
+            var methodTicket2 = ticket2.GetType().GetMethod(methodName);
+
+            Assert.NotNull(methodTicket1);
+            Assert.NotNull(methodTicket2);
+        }
+
+        // Test #14
+        // Method: TicketStats.GetTicketStats exists and return type <string>
+        [Fact]
+        public void Method_Exist_GetTicketStats_ReturnTypeIsString()
+        {
+            TicketStats ticketStats = TicketStats.GetInstance();
+            var ticketStatsString = ticketStats.GetTicketStats();
+
+            Assert.IsType<string>(ticketStatsString);
         }
 
         // path testing. true/false if/else paths
