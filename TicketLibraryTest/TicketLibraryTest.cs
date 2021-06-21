@@ -6,7 +6,8 @@ namespace TicketLibraryTest
 {
     public class TicketLibraryTest
     {
-
+        TicketContainer ticketContainer = new TicketContainer();
+        TicketStats ticketStats = new TicketStats();
         // Test #1
         // Creates Ticket with two arguments, password change
         // Expect:
@@ -18,7 +19,7 @@ namespace TicketLibraryTest
         {
             var staffID = "staffID test";
             var description = "Password Change";
-            Ticket ticket = AppLogic.CreateTicket(staffID, description);
+            Ticket ticket = AppLogic.CreateTicket(staffID, description, ticketStats, ticketContainer);
 
             var expectedResponse = "Not Yet Provided";
             var actualResponse = ticket.Response;
@@ -59,7 +60,7 @@ namespace TicketLibraryTest
             string staffId = staffID;
             string desc = description;
 
-            Ticket ticket = AppLogic.CreateTicket(staffID, description);
+            Ticket ticket = AppLogic.CreateTicket(staffID, description, ticketStats, ticketContainer);
 
             var expectedResponse = "Not Yet Provided";
             var actualResponse = ticket.Response;
@@ -97,7 +98,7 @@ namespace TicketLibraryTest
             var email = "email test";
             var creatorName = "creatorName test";
 
-            Ticket ticket = AppLogic.CreateTicket(staffID, description, email, creatorName);
+            Ticket ticket = AppLogic.CreateTicket(staffID, description, email, creatorName, ticketStats, ticketContainer);
 
             var expectedResponse = "Not Yet Provided";
             var actualResponse = ticket.Response;
@@ -135,7 +136,7 @@ namespace TicketLibraryTest
             var email = "email test";
             var creatorName = "creatorName test";
 
-            Ticket ticket = AppLogic.CreateTicket(staffID, description, email, creatorName);
+            Ticket ticket = AppLogic.CreateTicket(staffID, description, email, creatorName, ticketStats, ticketContainer);
 
             var expectedResponse = "Not Yet Provided";
             var actualResponse = ticket.Response;
@@ -161,29 +162,22 @@ namespace TicketLibraryTest
         }
 
         // Test #5
-        // Only one instance of TicketStats 
+        // TicketStats variables encapsulated with default value of 0
         [Fact]
-        public void TicketStatsReturnsSameInstance()
+        public void TicketStats_VariablesEncapsulatedWithDefaultZero()
         {
-            var ticketstats1 = TicketStats.GetInstance();
-            var ticketstats2 = TicketStats.GetInstance();
-            var ticketstats3 = TicketStats.GetInstance();
+            TicketStats ticketStats = new TicketStats();
+            var openDefault = ticketStats.GetOpened();
+            var closedDefault = ticketStats.GetClosed();
+            var createdDefault = ticketStats.GetCreated();
 
-            Assert.True(ticketstats1.Equals(ticketstats2));
-            Assert.True(ticketstats2.Equals(ticketstats3));
-        }
-        
-        // Test #6
-        // Only one instance of TicketContainer
-        [Fact]
-        public void TicketContainerReturnsSameInstance()
-        {
-            var ticketContainer1 = TicketContainer.GetInstance();
-            var ticketContainer2 = TicketContainer.GetInstance();
-            var ticketContainer3 = TicketContainer.GetInstance();
+            uint expectedOpen = 0;
+            uint expectedClosed = 0;
+            uint expectedCreated = 0;
 
-            Assert.True(ticketContainer1.Equals(ticketContainer2));
-            Assert.True(ticketContainer2.Equals(ticketContainer3));
+            Assert.Equal(expectedOpen, openDefault);
+            Assert.Equal(expectedClosed, closedDefault);
+            Assert.Equal(expectedCreated, createdDefault);
         }
 
         // Test #7
@@ -193,15 +187,15 @@ namespace TicketLibraryTest
         [Fact]
         public void CreateTicket_StatsUpdateByOnePerTicket()
         {
-            TicketStats ticketStats = TicketStats.GetInstance();
+            TicketStats ticketStats = new TicketStats();
 
             // Get before Ticket created stats and Ticket count
             var createdBefore = ticketStats.GetCreated();
             var openedBefore = ticketStats.GetOpened();
 
             // Create Tickets 
-            AppLogic.CreateTicket("test", "test");
-            AppLogic.CreateTicket("test", "test", "test", "test");
+            AppLogic.CreateTicket("test", "test", ticketStats, ticketContainer);
+            AppLogic.CreateTicket("test", "test", "test", "test", ticketStats, ticketContainer);
 
             var expectedCreatedAfter = createdBefore + 2;
             var actualCreatedAfter = ticketStats.GetCreated();
@@ -219,8 +213,8 @@ namespace TicketLibraryTest
         public void CreateTicket_TicketNumberPlusOne()
         {
             // To get before ticket number
-            Ticket ticket = AppLogic.CreateTicket("test", "test");
-            Ticket ticket2 = AppLogic.CreateTicket("test", "test", "test", "test");
+            Ticket ticket = AppLogic.CreateTicket("test", "test", ticketStats, ticketContainer);
+            Ticket ticket2 = AppLogic.CreateTicket("test", "test", "test", "test", ticketStats, ticketContainer);
             
             var beforeTicketNumber = ticket.TicketNumber;
             var afterTicketNumber = ticket2.TicketNumber;
@@ -236,8 +230,8 @@ namespace TicketLibraryTest
         [Fact]
         public void Resolve_WithMessage_SetsTicketResponseToMessage()
         {
-            Ticket ticket = AppLogic.CreateTicket("test", "test");
-            Ticket ticket2 = AppLogic.CreateTicket("test", "test", "test", "test");
+            Ticket ticket = AppLogic.CreateTicket("test", "test", ticketStats, ticketContainer);
+            Ticket ticket2 = AppLogic.CreateTicket("test", "test", "test", "test", ticketStats, ticketContainer);
             var message = "test message";
 
             ticket.Resolve(message);
@@ -258,9 +252,9 @@ namespace TicketLibraryTest
         [Fact]
         public void Resolve_Updates_TicketStatsOpenedMinusOne_TicketStatsClosedPlusOne()
         {
-            TicketStats ticketStats = TicketStats.GetInstance();
-            Ticket ticket = AppLogic.CreateTicket("test", "test");
-            Ticket ticket2 = AppLogic.CreateTicket("test", "test", "test", "test");
+            TicketStats ticketStats = new TicketStats();
+            Ticket ticket = AppLogic.CreateTicket("test", "test", ticketStats, ticketContainer);
+            Ticket ticket2 = AppLogic.CreateTicket("test", "test", "test", "test", ticketStats, ticketContainer);
             
             var beforeOpened = ticketStats.GetOpened();
             var beforeClosed = ticketStats.GetClosed();
@@ -283,11 +277,11 @@ namespace TicketLibraryTest
         [Fact]
         public void Reopen_Updates_TicketStatsOpenedPlusOne_TicketStatsClosedMinusOne()
         {
-            TicketStats ticketStats = TicketStats.GetInstance();
-            Ticket ticket = AppLogic.CreateTicket("test", "test");
-            Ticket ticket2 = AppLogic.CreateTicket("test", "test", "test", "test");
-            ticket.Resolve("");
-            ticket2.Resolve("");
+            TicketStats ticketStats = new TicketStats();
+            Ticket ticket = AppLogic.CreateTicket("test", "test", ticketStats, ticketContainer);
+            Ticket ticket2 = AppLogic.CreateTicket("test", "test", "test", "test", ticketStats, ticketContainer);
+            ticket.Resolve("test");
+            ticket2.Resolve("test");
 
             var beforeOpened = ticketStats.GetOpened();
             var beforeClosed = ticketStats.GetClosed();
@@ -317,8 +311,8 @@ namespace TicketLibraryTest
         [InlineData("Status")]
         public void Property_Exist_InTicketClass(string propertyName)
         {
-            Ticket ticket = AppLogic.CreateTicket("test", "test");
-            Ticket ticket2 = AppLogic.CreateTicket("test", "test", "test", "test");
+            Ticket ticket = AppLogic.CreateTicket("test", "test", ticketStats, ticketContainer);
+            Ticket ticket2 = AppLogic.CreateTicket("test", "test", "test", "test", ticketStats, ticketContainer);
 
             var propertyTicket1 = ticket.GetType().GetProperty(propertyName);
             var propertyTicket2 = ticket2.GetType().GetProperty(propertyName);
@@ -334,8 +328,8 @@ namespace TicketLibraryTest
         [InlineData("Reopen")]
         public void Method_Exist_InTicketClass(string methodName)
         {
-            Ticket ticket = AppLogic.CreateTicket("test", "test");
-            Ticket ticket2 = AppLogic.CreateTicket("test", "test", "test", "test");
+            Ticket ticket = AppLogic.CreateTicket("test", "test", ticketStats, ticketContainer);
+            Ticket ticket2 = AppLogic.CreateTicket("test", "test", "test", "test", ticketStats, ticketContainer);
 
             var methodTicket1 = ticket.GetType().GetMethod(methodName);
             var methodTicket2 = ticket2.GetType().GetMethod(methodName);
@@ -349,7 +343,7 @@ namespace TicketLibraryTest
         [Fact]
         public void Method_Exist_GetTicketStats_ReturnTypeIsString()
         {
-            TicketStats ticketStats = TicketStats.GetInstance();
+            TicketStats ticketStats = new TicketStats();
             var ticketStatsString = ticketStats.GetTicketStats();
 
             Assert.IsType<string>(ticketStatsString);

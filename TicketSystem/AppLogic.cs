@@ -5,38 +5,35 @@ namespace TicketSystem
 {
     public class AppLogic
     {
-        public static Ticket CreateTicket(string staffID, string description)
+        public static Ticket CreateTicket(string staffID, string description, TicketStats ticketStats, TicketContainer ticketContainer)
         {
-            Ticket ticket = new Ticket(staffID, description, TicketStats.GetInstance());
-            TicketContainer ticketContainer = TicketContainer.GetInstance();
+             
+            Ticket ticket = new Ticket(staffID, description, ticketStats);
             ticketContainer.AddTicket(ticket);
 
             return ticket;
         }
 
-        public static Ticket CreateTicket(string staffID, string description, string creatorName, string email)
+        public static Ticket CreateTicket(string staffID, string description, string creatorName, string email, TicketStats ticketStats, TicketContainer ticketContainer)
         {
-            Ticket ticket = new Ticket(staffID, description, creatorName, email, TicketStats.GetInstance());
-            TicketContainer ticketContainer = TicketContainer.GetInstance();
+            Ticket ticket = new Ticket(staffID, description, creatorName, email, ticketStats);
             ticketContainer.AddTicket(ticket);
 
             return ticket;
         }
 
-        public static void DisplayTicketStatsAndInformation()
+        public static void DisplayTicketStatsAndInformation(TicketStats ticketStats, TicketContainer ticketContainer)
         {
-            PrintAllTicketStatistics();
-            PrintAllTicketObjects();  
+            PrintAllTicketStatistics(ticketStats);
+            PrintAllTicketObjects(ticketContainer);  
         }
-        public static void PrintAllTicketStatistics()
+        public static void PrintAllTicketStatistics(TicketStats ticketStats)
         {
-            TicketStats ticketStats = TicketStats.GetInstance();
             Console.WriteLine("Displaying Ticket Statistics: \n");
             Console.WriteLine(ticketStats.GetTicketStats());
         }
-        public static void PrintAllTicketObjects()
+        public static void PrintAllTicketObjects(TicketContainer ticketContainer)
         {
-            var ticketContainer = TicketContainer.GetInstance();
             var tickets = ticketContainer.GetTickets();
 
             Console.WriteLine("Printing Tickets: \n");
