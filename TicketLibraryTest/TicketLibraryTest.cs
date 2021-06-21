@@ -56,9 +56,6 @@ namespace TicketLibraryTest
         public void CreateTicket_TwoArgs_NoPasswordChangeRequest(string staffID, string description)
         {
             //Arrange
-            var defaultTicketResponse = "Not Yet Provided";
-            var defaultEmail = "Not Specified";
-            var defaultCreatorName = "Not Specified";
             string staffId = staffID;
             string desc = description;
 

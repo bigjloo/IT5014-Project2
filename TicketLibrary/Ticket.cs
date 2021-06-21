@@ -13,6 +13,7 @@ namespace TicketLibrary
         public string Response { get; private set; } = "Not Yet Provided";
 
         private static uint _ticketCounter = 0;
+        private const uint _ticketNumberConstant = 2000;
         private readonly ITicketStats _ticketStats; 
 
         public Ticket(string staffID, string description, ITicketStats ticketStats)
@@ -73,7 +74,7 @@ namespace TicketLibrary
 
         private static uint GetTicketNumber()
         {
-            var ticketNumber = _ticketCounter + 2000;
+            var ticketNumber = _ticketCounter + _ticketNumberConstant;
             return ticketNumber;
         }
 

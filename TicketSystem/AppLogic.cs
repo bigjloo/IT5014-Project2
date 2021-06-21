@@ -40,7 +40,7 @@ namespace TicketSystem
             var tickets = ticketContainer.GetTickets();
 
             Console.WriteLine("Printing Tickets: \n");
-            foreach (Ticket ticket in tickets)
+            foreach(Ticket ticket in tickets)
             {
                 Console.WriteLine($"Ticket Number: {ticket.TicketNumber}");
                 Console.WriteLine($"Ticket Creator: {ticket.CreatorName}");

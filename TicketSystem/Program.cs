@@ -7,13 +7,13 @@ namespace TicketSystem
     {
         static void Main()
         {
-            // Ticket #1 with two arguements
+            // Ticket #1 with two arguments
             string staffID_1 = "JAYL";
             string description_1 = "My screen is all blue";
             Ticket ticket_1 = AppLogic.CreateTicket(staffID_1, description_1);
 
 
-            // Ticket #2 with four arguements
+            // Ticket #2 with four arguments
             string staffID_2 = "JOHND";
             string description_2 = "Where's my mouse";
             string creatorName_2 = "John Doe";
@@ -29,7 +29,7 @@ namespace TicketSystem
 
             // Resolve ticket_1 and ticket 2
             string responseMessage = "Press restart button";
-            string responseMessage_2 = "Mouse sent";
+            string responseMessage_2 = "Mouse on the way";
             ticket_1.Resolve(responseMessage);
             ticket_2.Resolve(responseMessage_2);
 

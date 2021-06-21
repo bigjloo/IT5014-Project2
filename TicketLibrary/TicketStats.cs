@@ -60,17 +60,8 @@ namespace TicketLibrary
 
         public string GetTicketStats()
         {   
-            //BEFORE
-            //Console.WriteLine("Displaying Ticket Statistics");
-            //Console.WriteLine("");
-            //Console.WriteLine($"Tickets Created: {Created}");
-            //Console.WriteLine($"Tickets Resolved: {Closed}");
-            //Console.WriteLine($"Tickets To Solve: {Opened}");
-            //Console.WriteLine("");
             string ticketStatistics = $"Tickets Created: {_created}\nTickets Resolved: {_closed}\nTickets To Solve: {_opened}\n";
             return ticketStatistics;
         }
-
-        
     }
 }
