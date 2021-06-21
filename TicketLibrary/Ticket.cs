@@ -23,7 +23,7 @@ namespace TicketLibrary
             CreatorName = "Not Specified";
             _ticketStats = ticketStats;
 
-            SetTicketCounter();
+            UpdateTicketCounter();
             TicketNumber = GetTicketNumber();
 
             SetStatus("Open");
@@ -35,7 +35,7 @@ namespace TicketLibrary
             }
         }
       
-        public Ticket(string staffID, string description, string creatorName, string email, ITicketStats ticketStats)
+        public Ticket(string staffID, string description, string email, string creatorName, ITicketStats ticketStats)
         {
             StaffID = staffID;
             Description = description;
@@ -43,7 +43,7 @@ namespace TicketLibrary
             CreatorName = creatorName;
             _ticketStats = ticketStats;
 
-            SetTicketCounter();
+            UpdateTicketCounter();
             TicketNumber = GetTicketNumber();
 
             SetStatus("Open");
@@ -66,7 +66,7 @@ namespace TicketLibrary
         }
 
         // problem when many set at same time?
-        private void SetTicketCounter()
+        private void UpdateTicketCounter()
         {
             _ticketCounter += 1;
         }

@@ -14,6 +14,7 @@ namespace TicketLibrary
     {
         public static string GeneratePassword(string staffID, uint ticketNumber)
         {
+            int timeStamp = DateTime.Now.Millisecond;
             string passwordFirstBlock = staffID.Substring(0, 2);
             string passwordSecondBlock = UintToHex(ticketNumber);
             string passwordFinalBlock = DateTime.Now.Millisecond.ToString("X");

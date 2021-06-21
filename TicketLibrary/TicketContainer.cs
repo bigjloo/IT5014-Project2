@@ -14,7 +14,7 @@ namespace TicketLibrary
 
         private TicketContainer() { }
        
-        public static TicketContainer getInstance()
+        public static TicketContainer GetInstance()
         {
             return _instance;
         }
@@ -24,7 +24,7 @@ namespace TicketLibrary
             _tickets.Add(ticket);
         }
 
-        public static List<Ticket> GetTickets()
+        public List<Ticket> GetTickets()
         {
             return _tickets;
         }

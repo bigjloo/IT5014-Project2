@@ -22,6 +22,21 @@ namespace TicketLibrary
             return _instance;
         }
 
+        public uint GetCreated()
+        {
+            return _created;
+        }
+
+        public uint GetClosed()
+        {
+            return _closed;
+        }
+
+        public uint GetOpened()
+        {
+            return _opened;
+        }
+
         public void UpdateStats(string status)
         {
             switch (status)
