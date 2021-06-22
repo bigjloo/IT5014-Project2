@@ -2,19 +2,21 @@
 
 namespace TicketLibrary
 {
-    public class Ticket
+    public class Ticket : ITicket
     {
-        public string StaffID { get; private set; }      
+        
+        public string StaffID { get; private set; }
         public string Description { get; private set; }
         public string Email { get; private set; }
         public string CreatorName { get; private set; }
         public uint TicketNumber { get; private set; }
         public string Status { get; private set; }
         public string Response { get; private set; } = "Not Yet Provided";
-
+        private const uint TicketNumberConstant = 2000;
         private static uint _ticketCounter = 0;
-        private const uint _ticketNumberConstant = 2000;
-        private readonly ITicketStats _ticketStats; 
+
+        ITicketStats _ticketStats;
+
 
         public Ticket(string staffID, string description, ITicketStats ticketStats)
         {
@@ -29,13 +31,13 @@ namespace TicketLibrary
 
             SetStatus("Open");
 
-            if(HasPasswordChangeIn(description))
+            if (HasPasswordChangeIn(description))
             {
                 ProcessPasswordChange();
                 SetStatus("Closed");
             }
         }
-      
+
         public Ticket(string staffID, string description, string email, string creatorName, ITicketStats ticketStats)
         {
             StaffID = staffID;
@@ -49,7 +51,7 @@ namespace TicketLibrary
 
             SetStatus("Open");
 
-            if(HasPasswordChangeIn(description))
+            if (HasPasswordChangeIn(description))
             {
                 ProcessPasswordChange();
                 SetStatus("Closed");
@@ -66,7 +68,6 @@ namespace TicketLibrary
             SetStatus("Reopened");
         }
 
-        // problem when many set at same time?
         private void UpdateTicketCounter()
         {
             _ticketCounter += 1;
@@ -74,7 +75,7 @@ namespace TicketLibrary
 
         private static uint GetTicketNumber()
         {
-            var ticketNumber = _ticketCounter + _ticketNumberConstant;
+            var ticketNumber = _ticketCounter + TicketNumberConstant;
             return ticketNumber;
         }
 

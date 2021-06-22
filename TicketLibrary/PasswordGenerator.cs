@@ -14,21 +14,12 @@ namespace TicketLibrary
     {
         public static string GeneratePassword(string staffID, uint ticketNumber)
         {
-            int timeStamp = DateTime.Now.Millisecond;
             string passwordFirstBlock = staffID.Substring(0, 2);
             string passwordSecondBlock = UintToHex(ticketNumber);
-            string passwordFinalBlock = DateTime.Now.Millisecond.ToString("X");
+            string passwordFinalBlock = DateTimeToHex(DateTime.Now, 3);
 
             var password = passwordFirstBlock + passwordSecondBlock + passwordFinalBlock;
             return password;
-        }
-
-        private static string StringToHex(string originalString)
-        {
-            byte[] bytes = Encoding.Default.GetBytes(originalString);
-            string hexString = BitConverter.ToString(bytes);
-            hexString = hexString.Replace("-", "");
-            return hexString;
         }
 
         private static string UintToHex(uint integer)
@@ -36,5 +27,18 @@ namespace TicketLibrary
             string hexString = integer.ToString("X");
             return hexString;
         }
+
+        private static string DateTimeToHex(DateTime dateTime, int numberOfChar)
+        {
+            int[] hexArray = new int[numberOfChar];
+            var subString = dateTime.ToString().Substring(0, numberOfChar);
+            for(var i = 0; i < numberOfChar; i++)
+            {
+                hexArray[i] = Convert.ToInt32(subString[i]);
+            }
+            string hexString = string.Join("", hexArray);
+            return hexString;
+        }
+
     }
 }

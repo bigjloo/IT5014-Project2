@@ -9,5 +9,6 @@ namespace TicketLibrary
     public interface ITicketStats
     {
         void UpdateStats(string status);
+        string GetTicketStats();
     }
 }

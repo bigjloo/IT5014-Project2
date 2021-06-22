@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketSystem", "TicketSyste
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketLibrary", "TicketLibrary\TicketLibrary.csproj", "{CADB81C9-F829-4F16-ABE8-FFFD24B969FC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketLibraryTest", "TicketLibraryTest\TicketLibraryTest.csproj", "{1E4E37AA-EFFC-4999-AB73-BFF5BF41914F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "TicketLibraryTest\Tests.csproj", "{1E4E37AA-EFFC-4999-AB73-BFF5BF41914F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7A1AE203-DEF3-4353-82F0-B95E8DEF5524}"
 	ProjectSection(SolutionItems) = preProject

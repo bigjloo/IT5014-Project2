@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 namespace TicketLibrary
 {
     // Stores Tickets in a List
-    public class TicketContainer
+    public class TicketContainer : ITicketContainer
     {
-        private static readonly List<Ticket> _tickets = new List<Ticket>();
+        private static readonly List<ITicket> _tickets = new List<ITicket>();
 
         public TicketContainer() { }
 
-        public void AddTicket(Ticket ticket)
+        public void AddTicket(ITicket ticket)
         {
             _tickets.Add(ticket);
         }
 
-        public List<Ticket> GetTickets()
+        public List<ITicket> GetTickets()
         {
             return _tickets;
         }

@@ -10,7 +10,6 @@ namespace TicketLibrary
     // Stores state of Ticket statistics
     public class TicketStats : ITicketStats
     {
-        //private TicketStats _instance;
         private uint _created { get; set; } = 0;
         private uint _closed { get; set; } = 0;
         private uint _opened { get; set; } = 0;
@@ -18,11 +17,6 @@ namespace TicketLibrary
         public TicketStats()
         {
         }
-
-        //public TicketStats GetInstance()
-        //{
-        //    return _instance;  
-        //}
 
         public uint GetCreated()
         {
