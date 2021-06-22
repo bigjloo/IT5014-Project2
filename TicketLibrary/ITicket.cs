@@ -4,5 +4,5 @@
     {
         void Reopen();
         void Resolve(string message);
-    }
+        void Respond(string message);
 }

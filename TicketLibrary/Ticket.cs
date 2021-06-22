@@ -62,16 +62,19 @@ namespace TicketLibrary
                 SetStatus("Closed");
             }
         }
+        public void Reopen()
+        {
+            SetStatus("Reopened");
+        }
 
         public void Resolve(string message)
         {
             Respond(message);
             SetStatus("Closed");
         }
-
-        public void Reopen()
+        public void Respond(string message)
         {
-            SetStatus("Reopened");
+            Response = message;
         }
 
         private void UpdateTicketCounter()
@@ -103,10 +106,7 @@ namespace TicketLibrary
             var message = $"New password generated: {password}";
             Respond(message);
         }
-        private void Respond(string message)
-        {
-            Response = message;
-        }
+
 
     }
 }
