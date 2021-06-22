@@ -9,9 +9,11 @@ namespace TicketLibrary
     // Stores Tickets in a List
     public class TicketContainer : ITicketContainer
     {
-        private static readonly List<ITicket> _tickets = new List<ITicket>();
-
-        public TicketContainer() { }
+        private List<ITicket> _tickets;
+        public TicketContainer() 
+        {
+            _tickets = new List<ITicket>();
+        }
 
         public void AddTicket(ITicket ticket)
         {

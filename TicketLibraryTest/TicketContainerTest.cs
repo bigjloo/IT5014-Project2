@@ -6,22 +6,20 @@ namespace Tests
 {
     public class TicketContainerTest
     {
+        TicketStats ticketStats = new TicketStats();
+        TicketContainer ticketContainer = new TicketContainer();
+
         // Test #
         [Fact]
         public void AddTicket_TicketListCountPlusOne()
         {
-            ITicketContainer ticketContainer = Factory.CreateTicketContainer();
-            ITicketStats ticketStats = Factory.CreateTicketStats();
-            ITicket ticket = new Ticket("test", "test", ticketStats);
-
+            Ticket ticket = new Ticket("test", "test", ticketStats);
             var beforeTicketsCount = ticketContainer.GetTickets().Count;
 
             ticketContainer.AddTicket(ticket);
 
-            var afterTicketsCount = ticketContainer.GetTickets().Count;
-
-            var expected = 1;
-            var actual = afterTicketsCount - beforeTicketsCount;
+            var expected = beforeTicketsCount + 1;
+            var actual = ticketContainer.GetTickets().Count;
 
             Assert.Equal(expected, actual);
         }
@@ -30,9 +28,7 @@ namespace Tests
         [Fact]
         public void AddTicket_TicketExistsInTicketContainer()
         {
-            ITicketContainer ticketContainer = Factory.CreateTicketContainer();
-            ITicketStats ticketStats = Factory.CreateTicketStats();
-            ITicket ticket = new Ticket("test2", "test2", ticketStats);
+            Ticket ticket = new Ticket("test2", "test2", ticketStats);
 
             ticketContainer.AddTicket(ticket);
             var tickets = ticketContainer.GetTickets();
@@ -42,24 +38,5 @@ namespace Tests
 
             Assert.Equal(expected, actual);
         }
-
-        //[Fact]
-        //public void GetTickets_ReturnListOfTickets()
-        //{
-        //    ITicketContainer ticketContainer = AppLogic.CreateTicketContainer();
-        //    ITicketStats ticketStats = AppLogic.CreateTicketStats();
-
-        //    ITicket ticket = new Ticket("test", "test", ticketStats);
-        //    ITicket ticket2 = new Ticket("test2", "test2", ticketStats);
-
-        //    ticketContainer.AddTicket(ticket);
-        //    ticketContainer.AddTicket(ticket2);
-
-        //    var tickets = ticketContainer.GetTickets();
-        //    var expected = 
-        //    var actual = tickets.GetType();
-        //    Assert.Equal(actual)
-
-        //}
     }
 }

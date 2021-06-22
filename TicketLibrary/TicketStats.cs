@@ -14,9 +14,7 @@ namespace TicketLibrary
         private uint _closed { get; set; } = 0;
         private uint _opened { get; set; } = 0;
 
-        public TicketStats()
-        {
-        }
+        public TicketStats() { }
 
         public uint GetCreated()
         {

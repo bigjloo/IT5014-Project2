@@ -7,23 +7,24 @@ using TicketLibrary;
 
 namespace TicketSystem
 {
-    public class Display
+    public static class Display
     {
-        public static void DisplayTicketStatsAndInformation(ITicketStats ticketStats, ITicketContainer ticketContainer)
+        public static void DisplayAllTicketStatsAndInformation(ITicketStats ticketStats, ITicketContainer ticketContainer)
         {
             DisplayTicketStatistics(ticketStats);
-            DisplayAllTicketInformation(ticketContainer);
+            DisplayTickets(ticketContainer);
         }
         public static void DisplayTicketStatistics(ITicketStats ticketStats)
         {
             Console.WriteLine("Displaying Ticket Statistics: \n");
             Console.WriteLine(ticketStats.GetTicketStats());
         }
-        public static void DisplayAllTicketInformation(ITicketContainer ticketContainer)
+        public static void DisplayTickets(ITicketContainer ticketContainer)
         {
             var tickets = ticketContainer.GetTickets();
 
             Console.WriteLine("Printing Tickets: \n");
+
             foreach (Ticket ticket in tickets)
             {
                 Console.WriteLine($"Ticket Number: {ticket.TicketNumber}");

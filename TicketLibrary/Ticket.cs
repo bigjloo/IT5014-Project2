@@ -4,7 +4,7 @@ namespace TicketLibrary
 {
     public class Ticket : ITicket
     {
-        
+        // Private setters so properties cannot be set from outside class
         public string StaffID { get; private set; }
         public string Description { get; private set; }
         public string Email { get; private set; }
@@ -12,14 +12,18 @@ namespace TicketLibrary
         public uint TicketNumber { get; private set; }
         public string Status { get; private set; }
         public string Response { get; private set; } = "Not Yet Provided";
+
         private const uint TicketNumberConstant = 2000;
+        // _ticketCounter + 1 for every new Ticket created
         private static uint _ticketCounter = 0;
 
+        // To call TicketStats.UpdateStats(status) whenever we update Status
         ITicketStats _ticketStats;
 
-
+        // Two arguments provided from user
         public Ticket(string staffID, string description, ITicketStats ticketStats)
         {
+            // Email, CreatorName default to "Not Specified" if not provided by user
             StaffID = staffID;
             Description = description;
             Email = "Not Specified";
@@ -38,6 +42,7 @@ namespace TicketLibrary
             }
         }
 
+        // Four arguments provided from user
         public Ticket(string staffID, string description, string email, string creatorName, ITicketStats ticketStats)
         {
             StaffID = staffID;
@@ -57,6 +62,7 @@ namespace TicketLibrary
                 SetStatus("Closed");
             }
         }
+
         public void Resolve(string message)
         {
             Respond(message);
