@@ -7,7 +7,7 @@ using TicketLibrary;
 
 namespace TicketSystem
 {
-    public static class Display
+    public static class TicketDisplay
     {
         public static void DisplayAllTicketStatsAndInformation(ITicketStats ticketStats, ITicketContainer ticketContainer)
         {

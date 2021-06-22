@@ -16,7 +16,7 @@ namespace TicketLibrary
         {
             string passwordFirstBlock = staffID.Substring(0, 2);
             string passwordSecondBlock = UintToHex(ticketNumber);
-            string passwordFinalBlock = DateTimeToHex(DateTime.Now, 3);
+            string passwordFinalBlock = DateTimeToHex();
 
             var password = passwordFirstBlock + passwordSecondBlock + passwordFinalBlock;
             return password;
@@ -28,7 +28,7 @@ namespace TicketLibrary
             return hexString;
         }
 
-        private static string DateTimeToHex(DateTime dateTime, int numberOfChar)
+        private static string DateTimeToHex()
         {
             //int[] hexArray = new int[numberOfChar];
             //var subString = dateTime.ToString().Substring(0, numberOfChar);
@@ -38,7 +38,7 @@ namespace TicketLibrary
             //}
             //string hexString = string.Join("", hexArray);
             //return hexString;
-            var subString = dateTime.ToString().Substring(0, numberOfChar);
+            var subString = DateTime.Now.ToString().Substring(0, 3);
             //var hexString = Convert.ToInt32(subString).ToString();
             byte[] ba = Encoding.Default.GetBytes(subString);
             var hexString = BitConverter.ToString(ba);
