@@ -13,12 +13,13 @@ namespace TicketLibrary
         public string Status { get; private set; }
         public string Response { get; private set; } = "Not Yet Provided";
 
-        private const uint TicketNumberConstant = 2000;
         // _ticketCounter + 1 for every new Ticket created
+        // _ticketNumber = _ticketCounter + TicketNumberConstant
+        private const uint TicketNumberConstant = 2000;        
         private static uint _ticketCounter = 0;
 
         // To call TicketStats.UpdateStats(status) whenever we update Status
-        ITicketStats _ticketStats;
+        readonly ITicketStats _ticketStats;
 
         // Two arguments provided from user
         public Ticket(string staffID, string description, ITicketStats ticketStats)
@@ -30,11 +31,13 @@ namespace TicketLibrary
             CreatorName = "Not Specified";
             _ticketStats = ticketStats;
 
+            // Update ticket counter and assign ticket number
             UpdateTicketCounter();
             TicketNumber = GetTicketNumber();
 
             SetStatus("Open");
 
+            // If description contains password change, process password change procedure
             if (HasPasswordChangeIn(description))
             {
                 ProcessPasswordChange();
@@ -94,6 +97,7 @@ namespace TicketLibrary
             _ticketStats.UpdateStats(status);
         }
 
+        // Returns true if description contains password change
         private static bool HasPasswordChangeIn(string description)
         {
             string str = description.ToLower();
@@ -102,6 +106,7 @@ namespace TicketLibrary
 
         private void ProcessPasswordChange()
         {
+            // Calls static method GeneratePassword, constructs a string and sets to response
             string password = PasswordGenerator.GeneratePassword(StaffID, TicketNumber);
             var message = $"New password generated: {password}";
             Respond(message);

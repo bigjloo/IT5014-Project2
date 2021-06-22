@@ -4,8 +4,6 @@ using TicketSystem;
 
 namespace Tests
 {
-
-    
     public class TIcketStatsTest
     {
         // Global variables for Tests
@@ -19,7 +17,7 @@ namespace Tests
         // Test #5
         // TicketStats variables encapsulated with default value of 0
         [Fact]
-        public void TicketStats_VariablesEncapsulatedWithDefaultZero()
+        public void TicketStats_VariablesEncapsulatedWithDefaultAsZero()
         {
             TicketStats ticketStats = new TicketStats();
             var openDefault = ticketStats.GetOpened();
@@ -40,7 +38,7 @@ namespace Tests
         //   TicketStats.Created += 1
         //   TicketStats.Opened += 1
         [Fact]
-        public void CreateTicket_UpdatesStatsCreatedPlusOne_OpenedPlusOne()
+        public void CreateTicket_UpdatesStats_CreatedPlusOne_OpenedPlusOne()
         {
             // Get before Ticket created and opened stats
             var createdBefore = ticketStats.GetCreated();
@@ -61,7 +59,7 @@ namespace Tests
         // Test #10
         // Method: Ticket.Resolve() updates TicketStats.Opened -1 and TicketStats.Closed +1
         [Fact]
-        public void Resolve_UpdatesStatsOpenedMinusOne_ClosedPlusOne()
+        public void Resolve_UpdatesStats_OpenedMinusOne_ClosedPlusOne()
         {
             Ticket ticket = new Ticket(staffID, description, ticketStats);
 
@@ -83,7 +81,7 @@ namespace Tests
         // Test #11
         // Method: Ticket.Reopen() updates TicketStats.Opened +1 and TicketStats.Closed -1
         [Fact]
-        public void Reopen_UpdatesStatsOpenedPlusOne_ClosedMinusOne()
+        public void Reopen_UpdatesStats_OpenedPlusOne_ClosedMinusOne()
         {
             Ticket ticket = new Ticket(staffID, description, ticketStats);
 

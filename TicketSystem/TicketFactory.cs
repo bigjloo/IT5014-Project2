@@ -5,8 +5,8 @@ namespace TicketSystem
 {
     public class TicketFactory
     {
-        ITicketStats _ticketStats;
-        ITicketContainer _ticketContainer;
+        readonly ITicketStats _ticketStats;
+        readonly ITicketContainer _ticketContainer;
 
         public TicketFactory(ITicketStats ticketStats, ITicketContainer ticketContainer)
         {
