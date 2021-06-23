@@ -9,21 +9,12 @@ namespace TicketLibrary
     // Stores Tickets in a List
     public class TicketContainer : ITicketContainer
     {
-        private List<ITicket> _tickets;
-        public TicketContainer() 
-        {
-            _tickets = new List<ITicket>();
-        }
+        readonly List<ITicket> _tickets;
+        public TicketContainer() => _tickets = new List<ITicket>();
 
-        public void AddTicket(ITicket ticket)
-        {
-            _tickets.Add(ticket);
-        }
+        public void AddTicket(ITicket ticket) => _tickets.Add(ticket);
 
-        public List<ITicket> GetTickets()
-        {
-            return _tickets;
-        }
+        public List<ITicket> GetTickets() => _tickets;
     }
 }
 

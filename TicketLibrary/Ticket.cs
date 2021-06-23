@@ -4,6 +4,8 @@ namespace TicketLibrary
 {
     public class Ticket : ITicket
     {
+        
+
         // Private setters so properties cannot be set from outside class
         public string StaffID { get; private set; }
         public string Description { get; private set; }
@@ -65,25 +67,16 @@ namespace TicketLibrary
                 SetStatus("Closed");
             }
         }
-        public void Reopen()
-        {
-            SetStatus("Reopened");
-        }
+        public void Reopen() => SetStatus("Reopened");
 
         public void Resolve(string message)
         {
             Respond(message);
             SetStatus("Closed");
         }
-        public void Respond(string message)
-        {
-            Response = message;
-        }
+        public void Respond(string message) => Response = message;
 
-        private void UpdateTicketCounter()
-        {
-            _ticketCounter += 1;
-        }
+        private void UpdateTicketCounter() => _ticketCounter += 1;
 
         private static uint GetTicketNumber()
         {

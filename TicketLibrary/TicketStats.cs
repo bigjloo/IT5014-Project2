@@ -16,20 +16,11 @@ namespace TicketLibrary
 
         public TicketStats() { }
 
-        public uint GetCreated()
-        {
-            return _created;
-        }
+        public uint GetCreated() => _created;
 
-        public uint GetClosed()
-        {
-            return _closed;
-        }
+        public uint GetClosed() => _closed;
 
-        public uint GetOpened()
-        {
-            return _opened;
-        }
+        public uint GetOpened() => _opened;
 
         public void UpdateStats(string status)
         {
@@ -37,18 +28,18 @@ namespace TicketLibrary
             {
                 case "Open":
                     _created += 1;
-                    _opened += 1;
-                    break;
+                _opened += 1;
+                break;
 
                 case "Closed":
                     _opened -= 1;
-                    _closed += 1;
-                    break;
+                _closed += 1;
+                break;
 
                 case "Reopened":
                     _opened += 1;
-                    _closed -= 1;
-                    break;
+                _closed -= 1;
+                break;
             }
         }
 
