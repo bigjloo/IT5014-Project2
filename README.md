@@ -346,7 +346,7 @@ instead
 3.  TicketFactory injects TicketStats to create Tickets and adds ticket
     to TicketContainer
 
-## Redesign after Test
+# Final redesign after Test
 
 ![redesigned diagram](/UML/UML_final.jpg)
 
