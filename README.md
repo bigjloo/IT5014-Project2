@@ -15,8 +15,8 @@
 Identifying user goals with use case diagram
 
 ## Use case diagram:
+<img src="/UML/use_case_diagram.jpg" width="400">
 
-![use case diagram](/UML/use_case_diagram.jpg)
 ## Users:
 
 - Staff - Internal staff from other departments
@@ -234,25 +234,25 @@ TR9 in Main method:
 
 ## Class diagram:
 
-![class diagram](/UML/class_diagram.jpg)
+<img src="/UML/class_diagram.jpg" height="400">
 
 ## Process diagrams:
 
 -   Create Ticket
 
-![create ticket](/UML/staff-create-ticket.jpg)
+<img src="/UML/staff-create-ticket.jpg" width="600">
 
 -   Resolve ticket
 
-![resolve ticket](/UML/helpdesk-resolve.jpg)
+<img src="/UML/helpdesk-resolve.jpg" width="600">
 
 -   Reopen Ticket
 
-![reopen ticket](/UML/helpdesk-reopen.jpg)
+<img src="/UML/helpdesk-reopen.jpg" width="600">
 
 -   Display ticket statistic and information
 
-![display](/UML/helpdesk-displayTicketStatsAndInformation.jpg)
+<img src="/UML/helpdesk-displayTicketStatsAndInformation.jpg" width="600">
 
 ## Object Oriented Programming concepts applied:
 
