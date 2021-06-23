@@ -22,9 +22,9 @@ namespace TicketSystem
             return ticket;
         }
 
-        public ITicket CreateTicket(string staffID, string description, string creatorName, string email)
+        public ITicket CreateTicket(string staffID, string description, string email, string creatorName)
         {
-            ITicket ticket = new Ticket(staffID, description, creatorName, email, _ticketStats);
+            ITicket ticket = new Ticket(staffID, description, email, creatorName, _ticketStats);
             _ticketContainer.AddTicket(ticket);
 
             return ticket;
