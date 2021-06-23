@@ -7,44 +7,32 @@ using System.Threading.Tasks;
 namespace TicketLibrary
 {   
     // Generates password from:
-    // First 2 characters of staffID
-    // + hexadecimal of ticketNumber
-    // + hexadecimal of first three characters of timestamp
+    // 1) First 2 characters of staffID
+    // 2) hexadecimal of ticketNumber
+    // 3) hexadecimal of first three characters of timestamp
     public static class PasswordGenerator
     {
         public static string GeneratePassword(string staffID, uint ticketNumber)
         {
+            // First 2 characters of staffID
             string passwordFirstBlock = staffID.Substring(0, 2);
-            string passwordSecondBlock = UintToHex(ticketNumber);
-            string passwordFinalBlock = DateTimeToHex();
 
-            var password = passwordFirstBlock + passwordSecondBlock + passwordFinalBlock;
+            // Hex representation of ticketNumber
+            string passwordSecondBlock = IntToHex(Convert.ToInt32(ticketNumber));
+
+            // DateTime.Now.Millisecond returns Int type range from 0-999
+            string passwordFinalBlock = IntToHex(DateTime.Now.Millisecond);
+
+            // Returns all three password blocks joined together 
+            string password = passwordFirstBlock + passwordSecondBlock + passwordFinalBlock;
             return password;
         }
 
-        private static string UintToHex(uint uinteger)
+        // Converts Int to Hex
+        private static string IntToHex(int integer)
         {
-            string hexString = uinteger.ToString("X");
+            string hexString = integer.ToString("X");
             return hexString;
         }
-
-        private static string DateTimeToHex()
-        {
-            //int[] hexArray = new int[numberOfChar];
-            //var subString = dateTime.ToString().Substring(0, numberOfChar);
-            //for (var i = 0; i < numberOfChar; i++)
-            //{
-            //    hexArray[i] = Convert.ToInt32(subString[i]);
-            //}
-            //string hexString = string.Join("", hexArray);
-            //return hexString;
-            var subString = DateTime.Now.ToString().Substring(0, 3);
-            //var hexString = Convert.ToInt32(subString).ToString();
-            byte[] ba = Encoding.Default.GetBytes(subString);
-            var hexString = BitConverter.ToString(ba);
-            hexString = hexString.Replace("-", "");
-            return hexString;
-        }
-
     }
 }

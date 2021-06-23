@@ -14,7 +14,6 @@ namespace Tests
         string defaultResponse = "Not Yet Provided";
 
         ITicketStats ticketStats = new TicketStats();
-        ITicketContainer ticketContainer = new TicketContainer();
 
         [Fact]
         public void CreateTicket_TwoArgs_ReturnsTicketTypeObject()

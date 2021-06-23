@@ -4,7 +4,7 @@ namespace TicketLibrary
 {
     public class Ticket : ITicket
     {
-        
+
 
         // Private setters so properties cannot be set from outside class
         public string StaffID { get; private set; }
@@ -16,11 +16,10 @@ namespace TicketLibrary
         public string Response { get; private set; } = "Not Yet Provided";
 
         // _ticketCounter + 1 for every new Ticket created
-        // _ticketNumber = _ticketCounter + TicketNumberConstant
-        private const uint TicketNumberConstant = 2000;        
+        private const uint TicketNumberConstant = 2000;
         private static uint _ticketCounter = 0;
 
-        // To call TicketStats.UpdateStats(status) whenever we update Status
+        // To call UpdateStats(status) whenever Status is updated
         readonly ITicketStats _ticketStats;
 
         // Two arguments provided from user
@@ -67,30 +66,47 @@ namespace TicketLibrary
                 SetStatus("Closed");
             }
         }
-        public void Reopen() => SetStatus("Reopened");
+        
+        // Sets status = "Reopened"
+        public void Reopen()
+        {
+            SetStatus("Reopened");
+        }
 
+        // Sets ticket.Response = message and sets Status to "Closed"
         public void Resolve(string message)
         {
             Respond(message);
             SetStatus("Closed");
         }
-        public void Respond(string message) => Response = message;
 
-        private void UpdateTicketCounter() => _ticketCounter += 1;
+        // Sets ticket.Response = message
+        public void Respond(string message)
+        {
+            Response = message;
+        }
 
+        // Increase _ticketCounter by 1
+        private void UpdateTicketCounter()
+        {
+            _ticketCounter += 1;
+        }
+
+        // Returns _ticketCounter + TicketNumberConstant
         private static uint GetTicketNumber()
         {
             var ticketNumber = _ticketCounter + TicketNumberConstant;
             return ticketNumber;
         }
 
+        // Sets Status and calls UpdateStats() from ticketStats
         private void SetStatus(string status)
         {
             Status = status;
             _ticketStats.UpdateStats(status);
         }
 
-        // Returns true if description contains password change
+        // Returns true if description contains "password change"
         private static bool HasPasswordChangeIn(string description)
         {
             string str = description.ToLower();
@@ -99,9 +115,13 @@ namespace TicketLibrary
 
         private void ProcessPasswordChange()
         {
-            // Calls static method GeneratePassword, constructs a string and sets to response
+            // Gets password from PasswordGenerator
             string password = PasswordGenerator.GeneratePassword(StaffID, TicketNumber);
+            
+            // Constructs message string with generated password
             var message = $"New password generated: {password}";
+
+            // Sets response = message
             Respond(message);
         }
 

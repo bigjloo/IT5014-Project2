@@ -6,6 +6,7 @@ namespace Tests
 {
     public class TicketFactoryTest
     {
+        // Global variables for Tests
         TicketStats ticketStats = new TicketStats();
         TicketContainer ticketContainer = new TicketContainer();
         
