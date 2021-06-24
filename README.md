@@ -305,10 +305,6 @@ Refer to solution files in folder
 
 Refer to Test files in folder
 
-### Test suite used 
-
-XUnit
-
 ### Functional requirements coverage
 
 10/13 -\> 77%
