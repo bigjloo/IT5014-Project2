@@ -319,7 +319,8 @@ Refer to Test files in folder
 
 -   Main()
 
--   Password Generator -- Hard to test with variable timestamp
+-   Password Generator -- Hard to test with variable timestamp'
+-   Private methods
 
 ## Line Coverage
 
