@@ -4,8 +4,6 @@ namespace TicketLibrary
 {
     public class Ticket : ITicket
     {
-
-
         // Private setters so properties cannot be set from outside class
         public string StaffID { get; private set; }
         public string Description { get; private set; }
@@ -124,7 +122,5 @@ namespace TicketLibrary
             // Sets response = message
             Respond(message);
         }
-
-
     }
 }
