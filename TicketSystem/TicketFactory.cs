@@ -19,7 +19,6 @@ namespace TicketSystem
         // Two arguments provided from user
         public ITicket CreateTicket(string staffID, string description)
         {
-
             ITicket ticket = new Ticket(staffID, description, _ticketStats);
             _ticketContainer.AddTicket(ticket);
 
