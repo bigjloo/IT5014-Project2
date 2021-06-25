@@ -15,16 +15,16 @@ namespace TicketLibrary
         public static string GeneratePassword(string staffID, uint ticketNumber)
         {
             // First 2 characters of staffID
-            string passwordFirstBlock = staffID.Substring(0, 2);
+            string firstPasswordBlock = staffID.Substring(0, 2);
 
             // Hex representation of ticketNumber
-            string passwordSecondBlock = IntToHex(Convert.ToInt32(ticketNumber));
+            string secondPasswordBlock = IntToHex(Convert.ToInt32(ticketNumber));
 
             // DateTime.Now.Millisecond returns Int type range from 0-999
-            string passwordFinalBlock = IntToHex(DateTime.Now.Millisecond);
+            string finalPasswordBlock = IntToHex(DateTime.Now.Millisecond);
 
             // Returns all three password blocks joined together 
-            string password = passwordFirstBlock + passwordSecondBlock + passwordFinalBlock;
+            string password = firstPasswordBlock + secondPasswordBlock + finalPasswordBlock;
             return password;
         }
 
