@@ -29,7 +29,6 @@ namespace TicketSystem
             var tickets = ticketContainer.GetTickets();
 
             Console.WriteLine("Printing Tickets: \n");
-
             foreach (Ticket ticket in tickets)
             {
                 Console.WriteLine($"Ticket Number: {ticket.TicketNumber}");
