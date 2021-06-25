@@ -14,7 +14,6 @@ namespace Tests
 
         TicketStats ticketStats = new TicketStats();
 
-        // Test #5
         // TicketStats variables encapsulated with default value of 0
         [Fact]
         public void TicketStats_VariablesEncapsulatedWithDefaultAsZero()
@@ -33,7 +32,6 @@ namespace Tests
             Assert.Equal(expectedCreated, createdDefault);
         }
 
-        // Test #7
         // For every Ticket created:
         //   TicketStats.Created += 1
         //   TicketStats.Opened += 1
@@ -56,7 +54,6 @@ namespace Tests
             Assert.Equal(expectedOpenedAfter, actualOpenedAfter);
         }
 
-        // Test #10
         // Method: Ticket.Resolve() updates TicketStats.Opened -1 and TicketStats.Closed +1
         [Fact]
         public void Resolve_UpdatesStats_OpenedMinusOne_ClosedPlusOne()
@@ -78,7 +75,6 @@ namespace Tests
             Assert.Equal(expectedAfterClosed, actualAfterClosed);
         }
 
-        // Test #11
         // Method: Ticket.Reopen() updates TicketStats.Opened +1 and TicketStats.Closed -1
         [Fact]
         public void Reopen_UpdatesStats_OpenedPlusOne_ClosedMinusOne()
@@ -102,7 +98,6 @@ namespace Tests
             Assert.Equal(expectedAfterClosed, actualAfterClosed);
         }
 
-        // Test #14
         // Method: TicketStats.GetTicketStats exists and return type <string>
         [Fact]
         public void Method_Exist_GetTicketStats_ReturnTypeIsString()
